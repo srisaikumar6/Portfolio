@@ -95,18 +95,430 @@
         -webkit-backdrop-filter: blur(12px);
       }
       .gradient-text {
-        background: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
+        background: linear-gradient(120deg, #b5a7ff 8%, #64e2d4 92%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+      }
+
+      :root {
+        color-scheme: dark;
+        scroll-padding-top: 6rem;
+      }
+
+      body {
+        background:
+          radial-gradient(ellipse at 82% 10%, rgba(52, 48, 117, 0.18), transparent 34rem),
+          radial-gradient(ellipse at 0% 40%, rgba(15, 87, 94, 0.11), transparent 30rem),
+          #090d16;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image: linear-gradient(rgba(148, 163, 184, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.025) 1px, transparent 1px);
+        background-size: 56px 56px;
+        content: "";
+        pointer-events: none;
+        mask-image: linear-gradient(to bottom, black, transparent 88%);
+      }
+
+      ::selection {
+        background: rgba(99, 102, 241, 0.55);
+      }
+
+      a,
+      button {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid #67e8d5;
+        outline-offset: 3px;
+      }
+
+      .scroll-progress {
+        position: fixed;
+        inset: 0 auto auto 0;
+        z-index: 60;
+        width: 100%;
+        height: 3px;
+        transform: scaleX(0);
+        transform-origin: left;
+        background: linear-gradient(90deg, #8b7bff, #4fe0d0);
+        box-shadow: 0 0 16px rgba(79, 224, 208, 0.45);
+      }
+
+      .glass-nav {
+        background: rgba(9, 13, 22, 0.78);
+        border-color: rgba(148, 163, 184, 0.12);
+      }
+
+      .glass-nav.is-scrolled {
+        background: rgba(9, 13, 22, 0.94);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+      }
+
+      .nav-link {
+        position: relative;
+        padding-block: 0.5rem;
+        transition: color 180ms ease;
+      }
+
+      .nav-link::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #8b7bff, #4fe0d0);
+        content: "";
+        transition: transform 180ms ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.is-active::after {
+        transform: scaleX(1);
+      }
+
+      .nav-link.is-active {
+        color: #fff;
+      }
+
+      #hero {
+        min-height: min(820px, calc(100svh - 5rem));
+        scroll-margin-top: 5rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        width: min(100%, 1160px);
+        grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+        align-items: center;
+        gap: clamp(2.5rem, 7vw, 6.5rem);
+      }
+
+      .hero-copy {
+        text-align: left;
+      }
+
+      .hero-copy .hero-description {
+        margin-inline: 0;
+      }
+
+      .hero-actions {
+        justify-content: flex-start;
+      }
+
+      .hero-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 440px;
+        margin-inline: 0;
+        text-align: left;
+      }
+
+      .hero-fact {
+        min-height: 76px;
+        padding: 0.8rem 1rem;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.54);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .hero-fact:hover {
+        transform: translateY(-3px);
+        border-color: rgba(103, 232, 213, 0.34);
+        background: rgba(15, 23, 42, 0.82);
+      }
+
+      .hero-visual {
+        position: relative;
+        isolation: isolate;
+        width: min(100%, 420px);
+        justify-self: end;
+        padding: 1px;
+        border-radius: 2rem;
+        background: linear-gradient(145deg, rgba(139, 123, 255, 0.72), rgba(79, 224, 208, 0.18) 48%, rgba(148, 163, 184, 0.14));
+        box-shadow: 0 32px 100px rgba(19, 18, 53, 0.48);
+      }
+
+      .hero-visual::before {
+        position: absolute;
+        z-index: -1;
+        inset: -18%;
+        border-radius: 50%;
+        background: conic-gradient(from 130deg, transparent 12%, rgba(99, 102, 241, 0.2), transparent 60%, rgba(34, 211, 238, 0.16));
+        filter: blur(40px);
+        content: "";
+        animation: orbit-glow 18s linear infinite;
+      }
+
+      .hero-visual-inner {
+        overflow: hidden;
+        padding: clamp(1.25rem, 3vw, 2rem);
+        border-radius: calc(2rem - 1px);
+        background:
+          radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.18), transparent 55%),
+          linear-gradient(150deg, rgba(17, 24, 39, 0.98), rgba(9, 13, 22, 0.98));
+      }
+
+      .hero-visual-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+        color: #94a3b8;
+        font: 500 0.72rem/1.5 "Inter", sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-visual-dots {
+        display: flex;
+        gap: 0.35rem;
+      }
+
+      .hero-visual-dots span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #64748b;
+      }
+
+      .hero-monogram {
+        display: grid;
+        width: 112px;
+        height: 112px;
+        place-items: center;
+        margin: 2rem auto 1.5rem;
+        border: 1px solid rgba(167, 139, 250, 0.4);
+        border-radius: 2rem;
+        background: linear-gradient(145deg, rgba(99, 102, 241, 0.24), rgba(34, 211, 238, 0.08));
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0.08), 0 0 56px rgba(99, 102, 241, 0.14);
+        color: #fff;
+        font: 700 2.4rem/1 "Outfit", sans-serif;
+        letter-spacing: -0.08em;
+      }
+
+      .hero-stack-list {
+        display: grid;
+        gap: 0.65rem;
+        margin-top: 1.5rem;
+      }
+
+      .hero-stack-item {
+        display: flex;
+        min-height: 54px;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.7rem 0.85rem;
+        border: 1px solid rgba(148, 163, 184, 0.1);
+        border-radius: 0.9rem;
+        background: rgba(15, 23, 42, 0.56);
+        color: #e2e8f0;
+        font-size: 0.82rem;
+      }
+
+      .hero-stack-icon {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        place-items: center;
+        border-radius: 0.65rem;
+        background: rgba(99, 102, 241, 0.14);
+        color: #a5b4fc;
+      }
+
+      .hero-stack-item:nth-child(2) .hero-stack-icon {
+        background: rgba(16, 185, 129, 0.12);
+        color: #6ee7b7;
+      }
+
+      .hero-stack-item:nth-child(3) .hero-stack-icon {
+        background: rgba(34, 211, 238, 0.12);
+        color: #67e8f9;
+      }
+
+      .hero-stack-item:nth-child(4) .hero-stack-icon {
+        background: rgba(192, 132, 252, 0.12);
+        color: #d8b4fe;
+      }
+
+      .hero-stack-item strong {
+        display: block;
+        color: #f8fafc;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .hero-stack-item span {
+        display: block;
+        margin-top: 0.1rem;
+        color: #94a3b8;
+        font-size: 0.68rem;
+      }
+
+      main > section:not(#hero) {
+        scroll-margin-top: 5rem;
+        border-image: linear-gradient(90deg, transparent, rgba(139, 123, 255, 0.22), rgba(79, 224, 208, 0.16), transparent) 1;
+      }
+
+      .project-card,
+      #experience .relative.group > div:last-child,
+      #education .bg-slate-900\/70 {
+        transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+      }
+
+      .project-card:hover,
+      #experience .relative.group > div:last-child:hover,
+      #education .bg-slate-900\/70:hover {
+        transform: translateY(-5px);
+        border-color: rgba(129, 140, 248, 0.42);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .filter-btn {
+        min-height: 38px;
+      }
+
+      .filter-btn[aria-pressed="true"] {
+        background: linear-gradient(110deg, #5b52d7, #138a91);
+        color: #fff;
+        box-shadow: 0 8px 22px rgba(79, 70, 229, 0.22);
+      }
+
+      .back-to-top {
+        position: fixed;
+        right: max(1rem, calc((100vw - 1200px) / 2));
+        bottom: 1.25rem;
+        z-index: 30;
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        transform: translateY(12px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 0.9rem;
+        background: rgba(17, 24, 39, 0.9);
+        color: #cbd5e1;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease, color 180ms ease, border-color 180ms ease;
+        backdrop-filter: blur(12px);
+      }
+
+      .back-to-top.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .back-to-top:hover {
+        border-color: rgba(103, 232, 213, 0.45);
+        color: #67e8d5;
+      }
+
+      #toast {
+        max-width: min( calc(100vw - 2rem), 28rem );
+      }
+
+      .project-modal-panel {
+        background:
+          radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.14), transparent 55%),
+          #111827;
+      }
+
+      .js .reveal {
+        transform: translateY(18px);
+        opacity: 0;
+        transition: opacity 550ms ease, transform 550ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+
+      .js .reveal.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      @keyframes orbit-glow {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 767px) {
+        #hero {
+          min-height: auto;
+        }
+
+        .hero-grid {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 2.5rem;
+          padding-block: 1rem;
+        }
+
+        .hero-copy {
+          text-align: center;
+        }
+
+        .hero-copy .hero-description {
+          margin-inline: auto;
+        }
+
+        .hero-actions {
+          justify-content: center;
+        }
+
+        .hero-facts {
+          margin-inline: auto;
+          text-align: left;
+        }
+
+        .hero-visual {
+          width: min(100%, 440px);
+          justify-self: center;
+        }
+
+        .back-to-top {
+          right: 1rem;
+          bottom: 1rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .js .reveal {
+          transform: none;
+          opacity: 1;
+        }
       }
     </style>
   </head>
   <body
     class="bg-[#090d16] text-slate-200 font-sans antialiased selection:bg-brand-500 selection:text-white"
   >
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
     <!-- ================= TOP NOTIFICATION / QUICK TOAST ================= -->
     <div
       id="toast"
+      role="status"
+      aria-live="polite"
       class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 bg-slate-900 border border-slate-700 text-white px-5 py-3 rounded-xl shadow-2xl"
     >
       <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
@@ -143,24 +555,25 @@
 
         <!-- Desktop Navigation Links -->
         <nav
+          aria-label="Main navigation"
           class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300"
         >
-          <a href="#about" class="hover:text-accent-cyan transition-colors"
+          <a href="#about" class="nav-link hover:text-accent-cyan transition-colors"
             >About</a
           >
-          <a href="#skills" class="hover:text-accent-cyan transition-colors"
+          <a href="#skills" class="nav-link hover:text-accent-cyan transition-colors"
             >Skills</a
           >
-          <a href="#projects" class="hover:text-accent-cyan transition-colors"
+          <a href="#projects" class="nav-link hover:text-accent-cyan transition-colors"
             >Projects</a
           >
-          <a href="#experience" class="hover:text-accent-cyan transition-colors"
+          <a href="#experience" class="nav-link hover:text-accent-cyan transition-colors"
             >Experience</a
           >
-          <a href="#education" class="hover:text-accent-cyan transition-colors"
+          <a href="#education" class="nav-link hover:text-accent-cyan transition-colors"
             >Education</a
           >
-          <a href="#contact" class="hover:text-accent-cyan transition-colors"
+          <a href="#contact" class="nav-link hover:text-accent-cyan transition-colors"
             >Contact</a
           >
         </nav>
@@ -180,6 +593,8 @@
           id="mobile-menu-btn"
           class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg border border-slate-800 focus:outline-none"
           aria-label="Toggle menu"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
         >
           <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
         </button>
@@ -232,7 +647,7 @@
       <!-- ================= HERO SECTION ================= -->
       <section
         id="hero"
-        class="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden py-16"
+        class="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden py-12 sm:py-16"
       >
         <!-- Background Ambient Glow -->
         <div
@@ -242,106 +657,113 @@
           class="absolute top-1/2 right-10 w-[300px] h-[250px] bg-accent-teal/15 blur-[120px] rounded-full pointer-events-none"
         ></div>
 
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-          <!-- Status Pill -->
-          <div
-            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-medium text-slate-300 mb-6 shadow-sm"
-          >
-            <span
-              class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
-            ></span>
-            Available for MERN & Full Stack Developer Roles
-          </div>
-
-          <!-- Main Title -->
-          <h1
-            class="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold tracking-tight text-white mb-6 leading-tight"
-          >
-            Hi, I'm <span class="gradient-text">Sri Sai Kumar</span>
-            <br />
-            <span
-              class="text-3xl sm:text-5xl md:text-6xl text-slate-300 font-bold"
-              >Vittamsetti</span
-            >
-          </h1>
-
-          <!-- Subtitle & Role Tagline -->
-          <p
-            class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-8 font-light leading-relaxed"
-          >
-            <strong class="text-white font-medium">MERN Stack Developer</strong>
-            with 1 year of web development experience building clean, responsive
-            interfaces with
-            <span class="text-brand-400 font-medium">React</span>, robust APIs
-            using
-            <span class="text-accent-cyan font-medium">Node & Express</span>,
-            and integrating
-            <span class="text-emerald-400 font-medium">AI APIs</span> for smart
-            conversational features.
-          </p>
-
-          <!-- CTAs -->
-          <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
-            <a
-              href="#projects"
-              class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-teal text-white font-semibold text-sm hover:scale-105 transition-all shadow-xl shadow-brand-600/25 flex items-center gap-2"
-            >
-              <i class="fa-solid fa-code"></i>
-              Explore Projects
-            </a>
-            <a
-              href="#contact"
-              class="px-7 py-3.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white hover:border-slate-500 font-semibold text-sm transition-all flex items-center gap-2"
-            >
-              <i class="fa-regular fa-paper-plane"></i>
-              Contact Me
-            </a>
-            <button
-              onclick="copyEmailToClipboard()"
-              class="px-4 py-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-400 hover:text-accent-cyan transition-colors text-sm"
-              title="Copy Email"
-            >
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
-
-          <!-- Quick Info Badges -->
-          <div
-            class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto pt-6 border-t border-slate-800/80 text-left"
-          >
+        <div class="hero-grid mx-auto relative z-10">
+          <div class="hero-copy">
             <div
-              class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/60"
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 text-xs font-medium text-slate-300 mb-6"
             >
-              <span class="text-xs text-slate-400 block">Experience</span>
-              <span class="text-sm font-semibold text-white"
-                >Full-Stack & AI Intern</span
-              >
+              <span
+                class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+              ></span>
+              Available for MERN & Full Stack Developer Roles
             </div>
-            <div
-              class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/60"
+
+            <h1
+              class="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold tracking-tight text-white mb-6 leading-[1.08]"
             >
-              <span class="text-xs text-slate-400 block">Location</span>
-              <span class="text-sm font-semibold text-white"
-                >Bengaluru, India</span
+              Hi, I'm
+              <span class="gradient-text">Sri Sai Kumar</span>
+              <span class="block text-slate-300 font-bold">Vittamsetti.</span>
+            </h1>
+
+            <p
+              class="hero-description text-base sm:text-lg text-slate-400 max-w-2xl mb-8 font-light leading-relaxed"
+            >
+              I build thoughtful digital experiences, from responsive
+              <strong class="text-white font-medium">React interfaces</strong>
+              and dependable
+              <span class="text-accent-cyan font-medium">Node & Express APIs</span>
+              to practical
+              <span class="text-emerald-400 font-medium">AI-powered features</span>.
+            </p>
+
+            <div class="hero-actions flex flex-wrap items-center gap-3 mb-9">
+              <a
+                href="#projects"
+                class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-teal text-white font-semibold text-sm hover:scale-[1.03] transition-all shadow-xl shadow-brand-600/25 flex items-center gap-2"
               >
+                <i class="fa-solid fa-arrow-right"></i>
+                Explore my work
+              </a>
+              <a
+                href="#contact"
+                class="px-6 py-3.5 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-white hover:border-slate-500 font-semibold text-sm transition-all flex items-center gap-2"
+              >
+                <i class="fa-regular fa-paper-plane"></i>
+                Let's talk
+              </a>
+              <button
+                onclick="copyEmailToClipboard()"
+                class="w-12 h-12 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-400 hover:text-accent-cyan hover:border-slate-600 transition-colors text-sm"
+                title="Copy email address"
+                aria-label="Copy email address"
+              >
+                <i class="fa-regular fa-copy"></i>
+              </button>
             </div>
-            <div
-              class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/60"
-            >
-              <span class="text-xs text-slate-400 block">Education</span>
-              <span class="text-sm font-semibold text-white"
-                >MCA (GPA 8.02)</span
-              >
-            </div>
-            <div
-              class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/60"
-            >
-              <span class="text-xs text-slate-400 block">Core Stack</span>
-              <span class="text-sm font-semibold text-white"
-                >MERN &bull; AI &bull; Cloud</span
-              >
+
+            <div class="hero-facts grid gap-2.5">
+              <div class="hero-fact">
+                <span class="text-[11px] text-slate-400 block mb-1">Based in</span>
+                <span class="text-sm font-semibold text-white"
+                  ><i class="fa-solid fa-location-dot text-accent-cyan mr-1.5"></i>Bengaluru, India</span
+                >
+              </div>
+              <div class="hero-fact">
+                <span class="text-[11px] text-slate-400 block mb-1">Education</span>
+                <span class="text-sm font-semibold text-white"
+                  ><i class="fa-solid fa-graduation-cap text-brand-400 mr-1.5"></i>MCA · GPA 8.02</span
+                >
+              </div>
             </div>
           </div>
+
+          <aside class="hero-visual" aria-label="My development toolkit">
+            <div class="hero-visual-inner">
+              <div class="hero-visual-top">
+                <span>My toolkit</span>
+                <span class="hero-visual-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </span>
+              </div>
+              <div class="hero-monogram" aria-hidden="true">SK</div>
+              <p class="text-center text-xl font-heading font-bold text-white">
+                Ideas into
+                <span class="gradient-text">experiences.</span>
+              </p>
+              <p class="text-center text-xs text-slate-400 mt-2">
+                Full-stack development, with a human touch.
+              </p>
+              <div class="hero-stack-list">
+                <div class="hero-stack-item">
+                  <span class="hero-stack-icon"><i class="fa-brands fa-react"></i></span>
+                  <div><strong>Frontend</strong><span>React · Responsive UI</span></div>
+                </div>
+                <div class="hero-stack-item">
+                  <span class="hero-stack-icon"><i class="fa-brands fa-node-js"></i></span>
+                  <div><strong>Backend</strong><span>Node.js · Express APIs</span></div>
+                </div>
+                <div class="hero-stack-item">
+                  <span class="hero-stack-icon"><i class="fa-solid fa-database"></i></span>
+                  <div><strong>Data</strong><span>MongoDB · SQL</span></div>
+                </div>
+                <div class="hero-stack-item">
+                  <span class="hero-stack-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                  <div><strong>Exploring</strong><span>AI integrations · Cloud</span></div>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -796,6 +1218,7 @@
               onclick="filterProjects('all')"
               class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition-all"
               data-category="all"
+              aria-pressed="true"
             >
               All
             </button>
@@ -1911,6 +2334,16 @@
       </section>
     </main>
 
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      type="button"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
     <!-- ================= FOOTER ================= -->
     <footer
       class="py-10 border-t border-slate-900 bg-slate-950 text-slate-400 text-xs"
@@ -1964,6 +2397,10 @@
     >
       <div
         class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Project details"
+        tabindex="-1"
       >
         <button
           onclick="closeProjectModal()"
@@ -1981,6 +2418,8 @@
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
+      document.documentElement.classList.add("js");
+
       // Set Current Year
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -1989,27 +2428,96 @@
       const mobileMenu = document.getElementById("mobile-menu");
       const mobileMenuIcon = document.getElementById("mobile-menu-icon");
 
+      function setMobileMenuOpen(isOpen) {
+        mobileMenu.classList.toggle("hidden", !isOpen);
+        mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
+        mobileMenuIcon.classList.toggle("fa-bars", !isOpen);
+        mobileMenuIcon.classList.toggle("fa-xmark", isOpen);
+      }
+
       mobileMenuBtn.addEventListener("click", () => {
-        const isHidden = mobileMenu.classList.contains("hidden");
-        if (isHidden) {
-          mobileMenu.classList.remove("hidden");
-          mobileMenuIcon.classList.remove("fa-bars");
-          mobileMenuIcon.classList.add("fa-xmark");
-        } else {
-          mobileMenu.classList.add("hidden");
-          mobileMenuIcon.classList.add("fa-bars");
-          mobileMenuIcon.classList.remove("fa-xmark");
-        }
+        setMobileMenuOpen(mobileMenu.classList.contains("hidden"));
       });
 
       // Close mobile menu on clicking any link
       document.querySelectorAll("#mobile-menu a").forEach((link) => {
         link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
-          mobileMenuIcon.classList.add("fa-bars");
-          mobileMenuIcon.classList.remove("fa-xmark");
+          setMobileMenuOpen(false);
         });
       });
+
+      const header = document.querySelector("header");
+      const scrollProgress = document.getElementById("scroll-progress");
+      const backToTop = document.getElementById("back-to-top");
+
+      function updateScrollControls() {
+        const scrollableHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const progress =
+          scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+        scrollProgress.style.transform = `scaleX(${progress})`;
+        header.classList.toggle("is-scrolled", window.scrollY > 12);
+        backToTop.classList.toggle("is-visible", window.scrollY > 520);
+      }
+
+      window.addEventListener("scroll", updateScrollControls, {
+        passive: true,
+      });
+      window.addEventListener("resize", updateScrollControls);
+      updateScrollControls();
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+        });
+      });
+
+      const navigationLinks = document.querySelectorAll(".nav-link");
+      const navigationSections = [...navigationLinks]
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      if ("IntersectionObserver" in window) {
+        const navigationObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              navigationLinks.forEach((link) => {
+                const isActive = link.getAttribute("href") === `#${entry.target.id}`;
+                link.classList.toggle("is-active", isActive);
+                if (isActive) link.setAttribute("aria-current", "location");
+                else link.removeAttribute("aria-current");
+              });
+            });
+          },
+          { rootMargin: "-25% 0px -65% 0px" },
+        );
+        navigationSections.forEach((section) =>
+          navigationObserver.observe(section),
+        );
+
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12 },
+        );
+        document
+          .querySelectorAll(
+            "#about .grid > *, #skills .grid > *, .project-card, #experience .relative.group, #education .grid > *, #contact .grid > *",
+          )
+          .forEach((element) => {
+            element.classList.add("reveal");
+            revealObserver.observe(element);
+          });
+      }
 
       // Toast Notification helper
       function showToast(message, isError = false) {
@@ -2057,9 +2565,11 @@
           if (btn.dataset.category === category) {
             btn.className =
               "filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition-all";
+            btn.setAttribute("aria-pressed", "true");
           } else {
             btn.className =
               "filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all";
+            btn.setAttribute("aria-pressed", "false");
           }
         });
 
@@ -2150,10 +2660,13 @@
       };
 
       // Modal Handlers
+      let previouslyFocusedElement = null;
+
       function openProjectModal(key) {
         const data = projectDetails[key];
         if (!data) return;
 
+        previouslyFocusedElement = document.activeElement;
         const modalContent = document.getElementById("modal-content");
         modalContent.innerHTML = `
         <span class="text-xs font-semibold text-accent-cyan uppercase tracking-wider">${data.category}</span>
@@ -2185,11 +2698,16 @@
 
         document.getElementById("project-modal").classList.remove("hidden");
         document.body.style.overflow = "hidden";
+        document
+          .querySelector("#project-modal [role='dialog']")
+          .focus();
       }
 
       function closeProjectModal() {
         document.getElementById("project-modal").classList.add("hidden");
         document.body.style.overflow = "auto";
+        previouslyFocusedElement?.focus();
+        previouslyFocusedElement = null;
       }
 
       // Close modal on background click
@@ -2200,6 +2718,16 @@
             closeProjectModal();
           }
         });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        if (!document.getElementById("project-modal").classList.contains("hidden")) {
+          closeProjectModal();
+        } else if (!mobileMenu.classList.contains("hidden")) {
+          setMobileMenuOpen(false);
+          mobileMenuBtn.focus();
+        }
+      });
 
       // Open the visitor's email app with the message details filled in.
       function handleFormSubmit(event) {
