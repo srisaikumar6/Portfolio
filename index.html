@@ -2393,12 +2393,28 @@
       >
         <p class="text-xs font-medium text-slate-400">Portfolio visitors</p>
         <img
-          src="https://visitor-badge.laobi.icu/badge?page_id=srisaikumar6.portfolio&left_color=1f2937&right_color=6366f1&left_text=Total%20views"
+          id="visitor-count-badge"
           alt="Total portfolio page views"
           referrerpolicy="no-referrer"
           width="120"
           height="20"
+          hidden
         />
+        <p
+          id="visitor-count-note"
+          class="text-[11px] text-slate-500"
+          aria-live="polite"
+        >
+          Loading visitor count…
+        </p>
+        <button
+          id="visitor-count-opt-out"
+          class="text-[11px] text-slate-400 underline underline-offset-4 hover:text-accent-cyan transition-colors"
+          type="button"
+          hidden
+        >
+          Exclude my visits on this device
+        </button>
       </div>
     </footer>
 
@@ -2434,6 +2450,69 @@
 
       // Set Current Year
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      const visitorCountPreference = "portfolio-exclude-own-views";
+      const visitorCountBadge = document.getElementById("visitor-count-badge");
+      const visitorCountNote = document.getElementById("visitor-count-note");
+      const visitorCountOptOut = document.getElementById("visitor-count-opt-out");
+      const visitorCountUrl = new URLSearchParams(window.location.search);
+
+      if (visitorCountUrl.get("exclude-my-views") === "1") {
+        localStorage.setItem(visitorCountPreference, "true");
+        visitorCountUrl.delete("exclude-my-views");
+        const remainingQuery = visitorCountUrl.toString();
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname +
+            (remainingQuery ? `?${remainingQuery}` : "") +
+            window.location.hash,
+        );
+      }
+
+      function updateVisitorCounter() {
+        if (window.location.hostname !== "srisaikumar6.github.io") {
+          visitorCountNote.textContent =
+            "Local previews do not count toward the live visitor total.";
+          return;
+        }
+
+        const excludeOwnViews =
+          localStorage.getItem(visitorCountPreference) === "true";
+        const counterUrl = new URL(
+          "https://visitor-badge.laobi.icu/badge?page_id=srisaikumar6.portfolio&left_color=1f2937&right_color=6366f1&left_text=Total%20views",
+        );
+        if (excludeOwnViews) {
+          counterUrl.searchParams.set("query_only", "true");
+        }
+        counterUrl.searchParams.set("_", Date.now().toString());
+        visitorCountBadge.src = counterUrl.toString();
+        visitorCountBadge.hidden = false;
+        visitorCountOptOut.hidden = false;
+        visitorCountOptOut.textContent = excludeOwnViews
+          ? "Count my visits again on this device"
+          : "Exclude my visits on this device";
+        visitorCountNote.textContent = excludeOwnViews
+          ? "Your visits on this device are excluded. Other visitors still count."
+          : "Counts page visits. You can exclude your visits on this device.";
+      }
+
+      visitorCountBadge.addEventListener("error", () => {
+        visitorCountNote.textContent =
+          "The visitor count is temporarily unavailable.";
+      });
+
+      visitorCountOptOut.addEventListener("click", () => {
+        const excludeOwnViews =
+          localStorage.getItem(visitorCountPreference) !== "true";
+        localStorage.setItem(
+          visitorCountPreference,
+          excludeOwnViews ? "true" : "false",
+        );
+        updateVisitorCounter();
+      });
+
+      updateVisitorCounter();
 
       // Mobile Menu Toggle
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
