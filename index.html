@@ -2244,20 +2244,22 @@
             </div>
           </div>
 
-          <!-- Functional Interactive Message Box -->
+          <!-- Email message form -->
           <div
             class="md:col-span-7 bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800"
           >
             <h4 class="text-xl font-heading font-bold text-white mb-1">
-              Leave a Message
+              Send me a message
             </h4>
-            <p class="text-slate-400 text-xs mb-6">
-              Your email app will open with your message ready to send.
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              Fill in the format below. Your email app will open with everything
+              addressed to me and ready to send.
             </p>
 
             <form
               id="contact-form"
               onsubmit="handleFormSubmit(event)"
+              aria-describedby="contact-form-note"
               class="space-y-4"
             >
               <div>
@@ -2269,7 +2271,10 @@
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   required
+                  autocomplete="name"
+                  maxlength="100"
                   placeholder="e.g. Hiring Manager / Recruiter"
                   class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 transition-colors"
                 />
@@ -2284,7 +2289,10 @@
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   required
+                  autocomplete="email"
+                  maxlength="254"
                   placeholder="you@company.com"
                   class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 transition-colors"
                 />
@@ -2299,7 +2307,9 @@
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
                   required
+                  maxlength="150"
                   placeholder="MERN Stack Developer Role"
                   class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 transition-colors"
                 />
@@ -2313,21 +2323,40 @@
                 >
                 <textarea
                   id="message"
+                  name="message"
                   rows="4"
                   required
+                  maxlength="5000"
                   placeholder="Write your message here..."
                   class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 transition-colors resize-none"
                 ></textarea>
               </div>
 
-              <button
-                type="submit"
-                id="submit-btn"
-                class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-brand-600 to-accent-teal hover:opacity-95 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-900/30 flex items-center justify-center gap-2"
+              <p
+                id="contact-form-note"
+                class="text-xs leading-relaxed text-slate-400"
               >
-                <i class="fa-solid fa-paper-plane"></i>
-                <span>Send Message</span>
-              </button>
+                Your email app will open with your name, reply address, subject,
+                and message filled in. Tap <strong class="text-slate-200">Send</strong>
+                there to deliver it.
+              </p>
+              <div class="grid gap-3 sm:grid-cols-2">
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-brand-600 to-accent-teal hover:opacity-95 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-900/30 flex items-center justify-center gap-2"
+                >
+                  <i class="fa-solid fa-envelope"></i>
+                  <span>Continue to Email</span>
+                </button>
+                <a
+                  href="tel:+918008034188"
+                  class="w-full py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2"
+                >
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Call me instead</span>
+                </a>
+              </div>
             </form>
           </div>
         </div>
